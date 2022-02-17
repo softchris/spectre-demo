@@ -6,6 +6,6 @@ This repo contains a console app built with Spectre.Console
 dotnet run
 ```
 
-## Demo
+## Demo
 
 ![Program demo](Spectre.gif)
