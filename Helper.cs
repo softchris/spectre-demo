@@ -45,7 +45,7 @@ public class Helpers
     AnsiConsole.MarkupLine(string.Format("[{0}]{1}[/]", color, message));
   }
 
-  public static void WriteHeader(string header)
+  private static void WriteHeader(string header)
   {
     AnsiConsole.Write(
     new FigletText(header)
@@ -53,10 +53,8 @@ public class Helpers
         .Color(Color.Red));
   }
 
-  public void RunProgram()
+  private void ReadUserInput()
   {
-    WriteHeader("Scaffold-demo");
-
     Console.WriteLine("");
     CreateReadme = AnsiConsole.Confirm("Generate a [green]README[/] file?");
     CreateGitIgnore = AnsiConsole.Confirm("Generate a [yellow].gitignore[/] file?");
@@ -69,7 +67,10 @@ public class Helpers
         .AddChoices(new[] {
             "XUnit", "NUnit","MSTest"
         }));
+  }
 
+  private void ProcessUserInput()
+  {
     AnsiConsole.Status()
     .Start("Generating project...", ctx =>
     {
@@ -97,5 +98,12 @@ public class Helpers
       AnsiConsole.MarkupLine("LOG: Configuring test framework...");
       Thread.Sleep(2000);
     });
+  }
+
+  public void RunProgram()
+  {
+    WriteHeader("Scaffold-demo");
+    ReadUserInput();
+    ProcessUserInput();
   }
 }
